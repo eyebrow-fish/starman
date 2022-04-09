@@ -1,11 +1,11 @@
 <template>
-  <div class="main">
+  <div class="list-main">
     <div class="list" :style="{width: `${listWidth}px`}">
       <div class="search-area">
         <input class="search" type="text" v-model="search" placeholder="example.org">
       </div>
-      <div v-for="(item, i) in items" :key="i">
-        <QueryItem :value="item"/>
+      <div v-for="item in items" :key="item.id">
+        <QueryItem :value="item" @click="selectItem(item)"/>
       </div>
     </div>
     <div
@@ -19,13 +19,11 @@
 <script>
 import QueryItem from '@/query-list/QueryItem'
 import {searchMatch} from '@/util/strings'
+import {mapMutations, mapState} from 'vuex'
 
 export default {
   name: 'NavList',
   components: {QueryItem},
-  props: {
-    value: Array,
-  },
   data() {
     return {
       search: '',
@@ -40,13 +38,18 @@ export default {
     document.removeEventListener('mouseup', this.endResizeListener)
   },
   computed: {
+    ...mapState(['queryItems']),
     items() {
-      return this.value.filter(i =>
+      return this.queryItems.filter(i =>
         searchMatch(i.method, this.search) || searchMatch(i.name, this.search),
       )
     },
   },
   methods: {
+    ...mapMutations(['setSelectedId']),
+    selectItem(item) {
+      this.setSelectedId(item.id)
+    },
     startResize() {
       this.resizing = true
       document.body.style.cursor = 'col-resize'
@@ -66,9 +69,10 @@ export default {
 </script>
 
 <style scoped>
-.main {
+.list-main {
   display: flex;
   overflow-x: hidden;
+  z-index: 1;
 }
 
 .resize-anchor {

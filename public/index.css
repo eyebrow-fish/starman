@@ -19,8 +19,10 @@ html, body {
 @media (prefers-color-scheme: dark) {
   :root {
     --bg-color: #212121;
-    --bg-color-2: #414141;
+    --bg-color-2: #313131;
+    --bg-color-3: #414141;
     --fg-color: #d7d7d7;
+    --fg-color-2: #a7a7a7;
     --accent-color: #9879fd;
     --border-color: #606060;
   }
@@ -28,22 +30,32 @@ html, body {
 
 @media (prefers-color-scheme: light) {
   :root {
-    --bg-color: #d7d7d7;
-    --bg-color-2: #c7c7c7;
+    --bg-color: #f7f7f7;
+    --bg-color-2: #d7d7d7;
+    --bg-color-3: #c7c7c7;
     --fg-color: #212121;
+    --fg-color-2: #313131;
     --accent-color: #6853ad;
     --border-color: #777777;
   }
 }
 
-input {
-  background-color: var(--bg-color-2);
+input, button {
+  background-color: var(--bg-color-3);
   color: var(--fg-color);
   border: solid 1px var(--border-color);
   font-size: 16px;
   outline: none;
 }
 
-input:focus {
+input:focus, button:hover {
   border-color: var(--accent-color);
+}
+
+button {
+  cursor: pointer;
+}
+
+button:hover {
+  color: var(--accent-color);
 }

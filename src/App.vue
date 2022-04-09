@@ -1,7 +1,7 @@
 <template>
   <div class="main">
-    <NavList :value="queryItems"></NavList>
-    <QueryEditor></QueryEditor>
+    <NavList/>
+    <QueryEditor/>
   </div>
 </template>
 
@@ -12,16 +12,6 @@ import QueryEditor from '@/query-editor/QueryEditor'
 export default {
   name: 'App',
   components: {QueryEditor, NavList},
-  computed: {
-    queryItems() { // Temporary
-      return [
-        {
-          method: 'GET',
-          name: 'foo',
-        },
-      ]
-    },
-  },
 }
 </script>
 

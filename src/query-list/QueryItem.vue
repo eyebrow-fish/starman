@@ -1,6 +1,6 @@
 <template>
   <div class="item">
-    <span>{{ value.method }}</span>
+    <span class="method">{{ value.method }}</span>
     <span>{{ value.name }}</span>
   </div>
 </template>
@@ -17,6 +17,7 @@ export default {
 <style scoped>
 .item {
   display: flex;
+  align-items: baseline;
   padding: 0.5em;
   border-bottom: solid 1px var(--border-color);
   cursor: pointer;
@@ -29,5 +30,12 @@ export default {
 
 .item *:not(:first-child) {
   margin-left: 0.5em;
+}
+
+.method {
+  background-color: var(--bg-color-3);
+  color: var(--fg-color-2);
+  padding: 0.25em;
+  font-size: 14px;
 }
 </style>
