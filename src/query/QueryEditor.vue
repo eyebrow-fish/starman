@@ -1,17 +1,17 @@
 <template>
-  <div class="editor">
+  <div class="editor" draggable="false">
     <div class="head">
-      <select v-model="queryItem.method">
+      <select v-model="currentQueryItem.method">
         <option v-for="method in methods" :key="method" :value="method" :label="method"/>
       </select>
-      <input type="text" class="url" v-model="queryItem.url" placeholder="https://example.org/">
+      <input type="text" class="url" v-model="currentQueryItem.url" placeholder="https://example.org/">
       <button>Send</button>
     </div>
   </div>
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import {mapGetters} from 'vuex'
 import methods from '@/lib/methods'
 
 export default {
@@ -22,10 +22,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['queryItems', 'selectedId']),
-    queryItem() {
-      return this.queryItems.find(item => item.id === this.selectedId)
-    },
+    ...mapGetters('queries', ['currentQueryItem']),
   },
 }
 </script>
@@ -34,8 +31,8 @@ export default {
 .editor {
   background-color: var(--bg-color);
   color: var(--fg-color);
-  margin-left: -4px;
   flex-grow: 1;
+  min-height: 200px;
 }
 
 .head {

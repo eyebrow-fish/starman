@@ -1,17 +1,21 @@
 <template>
   <div class="main">
     <NavList/>
-    <QueryEditor/>
+    <div class="right-pane">
+      <QueryEditor/>
+      <OutputPane/>
+    </div>
   </div>
 </template>
 
 <script>
-import NavList from '@/query-list/QueryList'
-import QueryEditor from '@/query-editor/QueryEditor'
+import NavList from '@/query/QueryList'
+import QueryEditor from '@/query/QueryEditor'
+import OutputPane from '@/output/OutputPane'
 
 export default {
   name: 'App',
-  components: {QueryEditor, NavList},
+  components: {OutputPane, QueryEditor, NavList},
 }
 </script>
 
@@ -20,5 +24,12 @@ export default {
   display: flex;
   width: 100%;
   height: 100%;
+}
+
+.right-pane {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin-left: -4px;
 }
 </style>
