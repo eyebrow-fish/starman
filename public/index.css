@@ -40,7 +40,7 @@ html, body {
   }
 }
 
-input, button {
+input, button, select {
   background-color: var(--bg-color-3);
   color: var(--fg-color);
   border: solid 1px var(--border-color);
@@ -48,14 +48,14 @@ input, button {
   outline: none;
 }
 
-input:focus, button:hover {
+input:focus, button:hover, select:hover {
   border-color: var(--accent-color);
 }
 
-button {
+button, select {
   cursor: pointer;
 }
 
-button:hover {
+button:hover, select:hover {
   color: var(--accent-color);
 }

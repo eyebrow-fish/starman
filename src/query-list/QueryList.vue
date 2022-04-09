@@ -18,7 +18,7 @@
 
 <script>
 import QueryItem from '@/query-list/QueryItem'
-import {searchMatch} from '@/util/strings'
+import {searchMatch} from '@/lib/strings'
 import {mapMutations, mapState} from 'vuex'
 
 export default {

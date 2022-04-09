@@ -1,6 +1,9 @@
 <template>
   <div class="editor">
     <div class="head">
+      <select v-model="queryItem.method">
+        <option v-for="method in methods" :key="method" :value="method" :label="method"/>
+      </select>
       <input type="text" class="url" v-model="queryItem.url" placeholder="https://example.org/">
       <button>Send</button>
     </div>
@@ -9,9 +12,15 @@
 
 <script>
 import {mapState} from 'vuex'
+import methods from '@/lib/methods'
 
 export default {
   name: 'QueryEditor',
+  data() {
+    return {
+      methods,
+    }
+  },
   computed: {
     ...mapState(['queryItems', 'selectedId']),
     queryItem() {
