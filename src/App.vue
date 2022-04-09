@@ -1,19 +1,34 @@
 <template>
-  <div>
-    <NavList :value="navItems"></NavList>
+  <div class="main">
+    <NavList :value="queryItems"></NavList>
+    <QueryEditor></QueryEditor>
   </div>
 </template>
 
 <script>
-import NavList from '@/nav-list/NavList'
+import NavList from '@/query-list/QueryList'
+import QueryEditor from '@/query-editor/QueryEditor'
 
 export default {
   name: 'App',
-  components: {NavList},
+  components: {QueryEditor, NavList},
   computed: {
-    navItems() { // Temporary
-      return [{name: 'foo'}]
+    queryItems() { // Temporary
+      return [
+        {
+          method: 'GET',
+          name: 'foo',
+        },
+      ]
     },
   },
 }
 </script>
+
+<style scoped>
+.main {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+</style>
