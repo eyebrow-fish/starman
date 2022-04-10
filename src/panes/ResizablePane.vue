@@ -9,14 +9,14 @@
       :class="{resizing: resizing}"
       @mousedown="startResize"
       v-if="direction === 'LEFT'"
-    ></div>
+    ><div class="resize-anchor-inner"></div></div>
     <slot></slot>
     <div
       class="resize-anchor right"
       :class="{resizing: resizing}"
       @mousedown="startResize"
       v-if="direction === 'RIGHT'"
-    ></div>
+    ><div class="resize-anchor-inner"></div></div>
   </div>
 </template>
 
@@ -82,27 +82,32 @@ export default {
 .resizable-pane {
   display: flex;
   z-index: 1;
+  position: relative;
 }
 
 .resize-anchor {
-  cursor: col-resize;
+  top: 0;
+  bottom: 0;
+  cursor: col-resize; 
+  position: absolute;
+  padding: 0 10px;
 }
 
 .resize-anchor.left {
-  border-right: solid 1px var(--border-color);
-  border-left: solid 4px transparent;
+  left: -10px;
 }
 
 .resize-anchor.right {
-  border-left: solid 1px var(--border-color);
-  border-right: solid 4px transparent;
+  right: -10px;
 }
 
-.resize-anchor.left:hover, .resize-anchor.left.resizing {
-  border-right-color: var(--accent-color);
+.resize-anchor-inner {
+  background-color: var(--border-color);
+  width: 1px;
+  height: 100%;
 }
 
-.resize-anchor.right:hover, .resize-anchor.right.resizing {
-  border-left-color: var(--accent-color);
+.resize-anchor:hover .resize-anchor-inner, .resize-anchor.resizing .resize-anchor-inner {
+  background-color: var(--accent-color);
 }
 </style>

@@ -33,7 +33,6 @@ export default {
   color: var(--fg-color);
   flex-grow: 1;
   min-width: 400px;
-  margin-right: -4px;
 }
 
 .head {
