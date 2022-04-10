@@ -67,6 +67,11 @@ button:disabled {
   color: var(--fg-color-2);
 }
 
+.ion-icon {
+  width: 100%;
+  height: 100%;
+}
+
 .head {
   display: flex;
   border-bottom: solid 1px var(--border-color);
@@ -74,6 +79,12 @@ button:disabled {
   width: 100%;
   height: 2.5em;
   min-height: 2.5em;
+}
+
+.head.small {
+  height: 1.5em;
+  min-height: 1.5em;
+  padding: 0.25em 0.5em;
 }
 
 .badge {

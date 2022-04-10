@@ -4,6 +4,17 @@
       <div class="head">
         <input class="search" type="text" v-model="search" placeholder="example.org">
       </div>
+      <div class="head small">
+        <span class="actions-text">Actions</span>
+        <div class="group">
+          <a class="add-query">
+            <ion-icon name="document"></ion-icon>
+          </a>
+          <a class="add-query">
+            <ion-icon name="folder"></ion-icon>
+          </a>
+        </div>
+      </div>
       <div v-for="item in items" :key="item.id">
         <QueryItem :value="item" @click="selectItem(item)"/>
       </div>
@@ -55,5 +66,23 @@ export default {
 
 .search {
   width: 100%;
+}
+
+.add-query {
+  cursor: pointer;
+  margin-left: 0.25em;
+}
+
+.add-query:hover {
+  color: var(--accent-color);
+}
+
+.head.small {
+  justify-content: space-between;
+}
+
+.actions-text {
+  font-size: 14px;
+  color: var(--fg-color-2);
 }
 </style>
