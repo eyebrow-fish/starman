@@ -21,6 +21,7 @@ html, body {
     --bg-color: #212121;
     --bg-color-2: #313131;
     --bg-color-3: #414141;
+    --bg-color-4: #515151;
     --fg-color: #d7d7d7;
     --fg-color-2: #a7a7a7;
     --accent-color: #9879fd;
@@ -30,13 +31,14 @@ html, body {
 
 @media (prefers-color-scheme: light) {
   :root {
-    --bg-color: #f7f7f7;
-    --bg-color-2: #d7d7d7;
-    --bg-color-3: #c7c7c7;
+    --bg-color: #ffffff;
+    --bg-color-2: #dfdfdf;
+    --bg-color-3: #cfcfcf;
+    --bg-color-4: #bfbfbf;
     --fg-color: #212121;
     --fg-color-2: #313131;
-    --accent-color: #6853ad;
-    --border-color: #777777;
+    --accent-color: #7b65c0;
+    --border-color: #adadad;
   }
 }
 
@@ -48,16 +50,21 @@ input, button, select {
   outline: none;
 }
 
-input:focus, button:hover, select:hover {
+input:not(:disabled):focus, button:not(:disabled):hover, select:not(:disabled):hover {
   border-color: var(--accent-color);
+}
+
+button:not(:disabled):hover, select:not(:disabled):hover {
+  color: var(--accent-color);
 }
 
 button, select {
   cursor: pointer;
 }
 
-button:hover, select:hover {
-  color: var(--accent-color);
+button:disabled {
+  background-color: var(--bg-color-4);
+  color: var(--fg-color-2);
 }
 
 .head {

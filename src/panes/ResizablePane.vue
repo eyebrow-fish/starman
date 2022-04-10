@@ -61,7 +61,7 @@ export default {
     endResizeListener() {
       if (!this.resizing) return
       this.resizing = false
-      document.body.style.cursor = 'default'
+      document.body.style.cursor = 'initial'
       document.removeEventListener('mousemove', this.resizeListener)
     },
     resizeListener(e) {

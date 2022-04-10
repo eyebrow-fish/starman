@@ -23,7 +23,10 @@ export default {
   name: 'OutputPane',
   components: {ResizablePane},
   computed: {
-    ...mapGetters('queries', ['currentResponse']),
+    ...mapGetters('queries', ['currentQueryItem']),
+    currentResponse() {
+      return this.currentQueryItem?.response
+    },
   },
 }
 </script>
