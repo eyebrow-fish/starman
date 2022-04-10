@@ -17,7 +17,7 @@
       </div>
       <div class="items">
         <div v-for="item in items" :key="item.id">
-          <QueryItem :value="item" @click="selectItem(item)"/>
+          <QueryItem :value="item"/>
         </div>
       </div>
     </div>
@@ -28,7 +28,7 @@
 import ResizablePane from '@/panes/ResizablePane'
 import QueryItem from '@/query/QueryItem'
 import {searchMatch} from '@/lib/strings'
-import {mapMutations, mapState} from 'vuex'
+import {mapState} from 'vuex'
 
 export default {
   name: 'NavList',
@@ -44,12 +44,6 @@ export default {
       return this.queryItems.filter(i =>
         searchMatch(i.method, this.search) || searchMatch(i.name, this.search),
       )
-    },
-  },
-  methods: {
-    ...mapMutations('queries', ['setSelectedId']),
-    selectItem(item) {
-      this.setSelectedId(item.id)
     },
   },
 }

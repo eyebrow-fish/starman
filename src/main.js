@@ -12,4 +12,6 @@ const store = createStore({
   },
 })
 
+document.addEventListener('contextmenu', e => e.preventDefault())
+
 createApp(App).use(store).mount('#app')

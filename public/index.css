@@ -26,6 +26,7 @@ html, body {
     --fg-color-2: #a7a7a7;
     --accent-color: #9879fd;
     --border-color: #606060;
+    --border-color-2: #424242;
   }
 }
 
@@ -39,6 +40,7 @@ html, body {
     --fg-color-2: #313131;
     --accent-color: #7b65c0;
     --border-color: #adadad;
+    --border-color-2: #e1e1e1;
   }
 }
 
@@ -54,11 +56,11 @@ input:not(:disabled):focus, button:not(:disabled):hover, select:not(:disabled):h
   border-color: var(--accent-color);
 }
 
-button:not(:disabled):hover, select:not(:disabled):hover {
+button:not(:disabled):hover, select:not(:disabled):hover, a:not(:disabled):hover {
   color: var(--accent-color);
 }
 
-button, select {
+button, select, a {
   cursor: pointer;
 }
 
