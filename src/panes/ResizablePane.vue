@@ -93,15 +93,15 @@ export default {
   bottom: 0;
   cursor: col-resize;
   position: absolute;
-  padding: 0 10px;
+  padding: 0 5px;
 }
 
 .resize-anchor.left {
-  left: -10px;
+  left: -5px;
 }
 
 .resize-anchor.right {
-  right: -10px;
+  right: -5px;
 }
 
 .resize-anchor-inner {

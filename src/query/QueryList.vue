@@ -15,8 +15,10 @@
           </a>
         </div>
       </div>
-      <div v-for="item in items" :key="item.id">
-        <QueryItem :value="item" @click="selectItem(item)"/>
+      <div class="items">
+        <div v-for="item in items" :key="item.id">
+          <QueryItem :value="item" @click="selectItem(item)"/>
+        </div>
       </div>
     </div>
   </ResizablePane>
@@ -57,11 +59,16 @@ export default {
 .list {
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
 
   background-color: var(--bg-color);
   color: var(--fg-color);
   width: 100%;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
 }
 
 .search {
