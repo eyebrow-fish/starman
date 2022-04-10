@@ -1,33 +1,28 @@
 <template>
-  <div class="item" @click="selectItem">
-    <span class="badge">{{ value.method }}</span>
-    <span v-show="!editing">{{ value.name }}</span>
+  <div class="item" :class="{selected: selectedId === item.id}" @click="selectItem">
+    <span class="badge">{{ item.method }}</span>
+    <span v-show="!item.editing">{{ item.name }}</span>
     <input
+      v-show="item.editing"
       ref="editName"
+      :value="item.name"
+      autofocus
       class="edit-name"
       type="text"
-      :value="value.name"
       @blur="edit"
-      autofocus
       @keydown.enter="edit"
-      v-show="editing"
     />
   </div>
 </template>
 
 <script>
-import {mapMutations} from 'vuex'
+import {mapMutations, mapState} from 'vuex'
 import {createContextMenu} from '@/menu/context-menu'
 
 export default {
   name: 'QueryItem',
   props: {
     value: Object,
-  },
-  data() {
-    return {
-      editing: false,
-    }
   },
   mounted() {
     this.$el.addEventListener('contextmenu', e => {
@@ -41,16 +36,25 @@ export default {
           {
             name: 'Edit',
             event: () => {
-              this.editing = true
-              setTimeout(() => {
-                this.$refs.editName.focus()
-              })
+              this.item.editing = true
             },
           },
         ],
       })
       e.preventDefault()
     })
+    if (this.item.editing) this.focusEditName()
+  },
+  watch: {
+    'item.editing'() {
+      this.focusEditName()
+    },
+  },
+  computed: {
+    ...mapState('queries', ['selectedId']),
+    item() {
+      return this.value
+    },
   },
   methods: {
     ...mapMutations('queries', ['setSelectedId']),
@@ -58,9 +62,14 @@ export default {
       this.setSelectedId(this.value.id)
     },
     edit() {
-      const item = this.value // Prevents vue from thinking I'm mutating "value"
-      item.name = this.$refs.editName.value
-      this.editing = false
+      this.item.name = this.$refs.editName.value
+      this.item.editing = false
+    },
+    focusEditName() {
+      setTimeout(() => {
+        this.$refs.editName.focus()
+        this.$refs.editName.select()
+      })
     },
   },
 }
@@ -74,6 +83,11 @@ export default {
   border-bottom: solid 1px var(--border-color);
   cursor: pointer;
   user-select: none;
+}
+
+.item.selected {
+  background-color: var(--bg-color-2);
+  border-right: solid 4px var(--accent-color);
 }
 
 .item:hover {

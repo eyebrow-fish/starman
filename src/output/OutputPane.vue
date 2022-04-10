@@ -1,12 +1,12 @@
 <template>
-  <ResizablePane default-width="50%" :min-width="200" direction="LEFT">
+  <ResizablePane :min-width="200" default-width="50%" direction="LEFT">
     <div class="output">
       <div class="head">
         <div class="group">
           <span class="badge">{{ currentResponse?.statusCode ?? 'No response' }}</span>
-          <span class="badge" v-if="currentResponse">{{ currentResponse.status }}</span>
+          <span v-if="currentResponse" class="badge">{{ currentResponse.status }}</span>
         </div>
-        <span class="badge" v-if="currentResponse">{{ currentResponse.responseTimeMs }}ms</span>
+        <span v-if="currentResponse" class="badge">{{ currentResponse.responseTimeMs }}ms</span>
       </div>
       <div class="body">
         {{ currentResponse?.body ?? 'No data' }}

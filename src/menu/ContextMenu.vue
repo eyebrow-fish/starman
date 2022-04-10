@@ -5,13 +5,13 @@
     @click.right="cleanup"
   >
     <div
-      class="menu"
       :style="{left: `${position.x}px`, top: `${position.y}px`, width}"
+      class="menu"
     >
       <a
-        class="action"
         v-for="action in actions"
         :key="action.name"
+        class="action"
         @click="action.event"
       >{{ action.name }}</a>
     </div>
@@ -58,7 +58,7 @@ export default {
 .menu {
   position: absolute;
   z-index: 1;
-  background-color: var(--bg-color-2);
+  background-color: var(--pure);
   border: solid 1px var(--border-color-2);
 }
 

@@ -3,6 +3,9 @@ html, body {
   height: 100%;
   background-color: var(--bg-color);
   color: var(--fg-color);
+  font-family: "Ubuntu Mono";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 * {
@@ -10,14 +13,13 @@ html, body {
 }
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   height: 100%;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
+    --pure: #000;
+    --pure-inverse: #fff;
     --bg-color: #212121;
     --bg-color-2: #313131;
     --bg-color-3: #414141;
@@ -32,6 +34,8 @@ html, body {
 
 @media (prefers-color-scheme: light) {
   :root {
+    --pure: #fff;
+    --pure-inverse: #000;
     --bg-color: #ffffff;
     --bg-color-2: #dfdfdf;
     --bg-color-3: #cfcfcf;

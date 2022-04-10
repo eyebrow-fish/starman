@@ -1,17 +1,24 @@
 <template>
   <div class="editor" draggable="false">
-    <div class="head">
-      <select v-model="currentQueryItem.method">
-        <option v-for="method in methods" :key="method" :value="method" :label="method"/>
-      </select>
-      <input type="text" class="url" v-model="currentQueryItem.url" placeholder="https://example.org/">
-      <button @click="sendRequest" :disabled="loading">Send</button>
+    <div v-if="currentQueryItem">
+      <div class="head">
+        <select v-model="currentQueryItem.method">
+          <option v-for="method in methods" :key="method" :label="method" :value="method"/>
+        </select>
+        <input v-model="currentQueryItem.url" class="url" placeholder="https://example.org/" type="text">
+        <button :disabled="loading" @click="sendRequest">Send</button>
+      </div>
+    </div>
+    <div class="empty" v-else>
+      <span>No query available. Create one from the list on the left or</span>
+      <button @click="addQuery">Create query</button>
+      <span>.</span>
     </div>
   </div>
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import {mapGetters, mapMutations} from 'vuex'
 import methods from '@/lib/methods'
 import axios from 'axios'
 
@@ -27,6 +34,7 @@ export default {
     ...mapGetters('queries', ['currentQueryItem']),
   },
   methods: {
+    ...mapMutations('queries', ['setSelectedId', 'newQueryItem']),
     async sendRequest() {
       this.loading = true
       const start = new Date()
@@ -41,6 +49,10 @@ export default {
         body: response.data,
       }
       this.loading = false
+    },
+    addQuery() {
+      const item = this.newQueryItem()
+      this.setSelectedId(item.id)
     },
   },
 }
@@ -60,5 +72,16 @@ export default {
 
 .url {
   width: 100%;
+}
+
+.empty {
+  width: fit-content;
+  margin: auto;
+  padding: 1em;
+  font-size: 18px;
+}
+
+.empty button {
+  margin-left: 0.5em;
 }
 </style>

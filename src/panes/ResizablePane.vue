@@ -1,22 +1,26 @@
 <template>
   <div
-    class="resizable-pane"
     :style="{width: `${width}px`, 'min-width': `${minWidth}px`}"
+    class="resizable-pane"
     draggable="false"
   >
     <div
-      class="resize-anchor left"
-      :class="{resizing: resizing}"
-      @mousedown="startResize"
       v-if="direction === 'LEFT'"
-    ><div class="resize-anchor-inner"></div></div>
+      :class="{resizing: resizing}"
+      class="resize-anchor left"
+      @mousedown="startResize"
+    >
+      <div class="resize-anchor-inner"></div>
+    </div>
     <slot></slot>
     <div
-      class="resize-anchor right"
-      :class="{resizing: resizing}"
-      @mousedown="startResize"
       v-if="direction === 'RIGHT'"
-    ><div class="resize-anchor-inner"></div></div>
+      :class="{resizing: resizing}"
+      class="resize-anchor right"
+      @mousedown="startResize"
+    >
+      <div class="resize-anchor-inner"></div>
+    </div>
   </div>
 </template>
 

@@ -2,23 +2,18 @@
   <ResizablePane :min-width="160">
     <div class="list">
       <div class="head">
-        <input class="search" type="text" v-model="search" placeholder="example.org">
+        <input v-model="search" class="search" placeholder="example.org" type="text">
       </div>
       <div class="head small">
         <span class="actions-text">Actions</span>
         <div class="group">
-          <a class="add-query">
+          <a class="add-query" @click="addQuery">
             <ion-icon name="document"></ion-icon>
-          </a>
-          <a class="add-query">
-            <ion-icon name="folder"></ion-icon>
           </a>
         </div>
       </div>
       <div class="items">
-        <div v-for="item in items" :key="item.id">
-          <QueryItem :value="item"/>
-        </div>
+        <QueryItem v-for="item in items" :key="item.id" :value="item"/>
       </div>
     </div>
   </ResizablePane>
@@ -28,7 +23,7 @@
 import ResizablePane from '@/panes/ResizablePane'
 import QueryItem from '@/query/QueryItem'
 import {searchMatch} from '@/lib/strings'
-import {mapState} from 'vuex'
+import {mapMutations, mapState} from 'vuex'
 
 export default {
   name: 'NavList',
@@ -39,11 +34,18 @@ export default {
     }
   },
   computed: {
-    ...mapState('queries', ['queryItems']),
+    ...mapState('queries', ['queryItems', 'queryItemId']),
     items() {
       return this.queryItems.filter(i =>
         searchMatch(i.method, this.search) || searchMatch(i.name, this.search),
       )
+    },
+  },
+  methods: {
+    ...mapMutations('queries', ['setSelectedId', 'newQueryItem']),
+    addQuery() {
+      const item = this.newQueryItem()
+      this.setSelectedId(item.id)
     },
   },
 }

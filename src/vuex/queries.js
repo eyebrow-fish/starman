@@ -1,26 +1,14 @@
 export default {
   namespaced: true,
   state: {
-    queryItems: [
-      {
-        id: 0,
-        name: 'foo',
-        method: 'GET',
-        url: 'https://ddg.gg/',
-        response: {
-          status: 'OK',
-          statusCode: 200,
-          responseTimeMs: 42,
-          body: 'qux',
-        },
-      },
-      {
-        id: 1,
-        name: 'bar',
-        method: 'GET',
-        url: 'https://stackoverflow.com/',
-      },
-    ],
+    queryItemId: {
+      id: 0,
+      name: '',
+      method: 'GET',
+      url: '',
+      editing: false,
+    },
+    queryItems: [],
     selectedId: 0,
   },
   getters: {
@@ -31,6 +19,16 @@ export default {
   mutations: {
     setSelectedId(store, value) {
       store.selectedId = value
+    },
+    newQueryItem(store) {
+      const item = {
+        ...store.queryItemId,
+        id: store.queryItems.length,
+        name: 'New query',
+        editing: true,
+      }
+      store.queryItems.push(item)
+      return item
     },
   },
 }
