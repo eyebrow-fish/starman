@@ -32,7 +32,8 @@ export default {
   background-color: var(--bg-color);
   color: var(--fg-color);
   flex-grow: 1;
-  min-height: 200px;
+  min-width: 400px;
+  margin-right: -4px;
 }
 
 .head {

@@ -1,25 +1,21 @@
 <template>
   <div
     class="resizable-pane"
-    :class="{vertical: isVertical, horizontal: !isVertical}"
-    :style="{
-      [isVertical ? 'height' : 'width']: `${size}px`,
-      [isVertical ? 'min-height' : 'min-width']: `${minSize}px`,
-    }"
+    :style="{width: `${width}px`, 'min-width': `${minWidth}px`}"
     draggable="false"
   >
     <div
-      class="resize-anchor"
+      class="resize-anchor left"
       :class="{resizing: resizing}"
       @mousedown="startResize"
-      v-if="isVertical"
+      v-if="direction === 'LEFT'"
     ></div>
     <slot></slot>
     <div
-      class="resize-anchor"
+      class="resize-anchor right"
       :class="{resizing: resizing}"
       @mousedown="startResize"
-      v-if="!isVertical"
+      v-if="direction === 'RIGHT'"
     ></div>
   </div>
 </template>
@@ -28,23 +24,30 @@
 export default {
   name: "ResizablePane",
   props: {
-    minSize: {
+    minWidth: {
       type: Number,
       required: true,
     },
-    isVertical: Boolean,
+    direction: {
+      type: String,
+      default: 'RIGHT',
+    },
   },
   data() {
     return {
-      size: +this.minSize,
+      maxWidth: 0,
+      width: +this.minWidth,
       resizing: false,
     }
   },
   mounted() {
+    this.computeAndSetMaxWidth()
     document.addEventListener('mouseup', this.endResizeListener)
+    window.addEventListener('resize', this.computeAndSetMaxWidth)
   },
   unmounted() {
     document.removeEventListener('mouseup', this.endResizeListener)
+    window.removeEventListener('resize', this.computeAndSetMaxWidth)
   },
   methods: {
     startResize() {
@@ -59,10 +62,17 @@ export default {
       document.removeEventListener('mousemove', this.resizeListener)
     },
     resizeListener(e) {
-      if (this.size >= this.minSize)
-        this.size += this.isVertical ? -e.movementY : e.movementX
+      const resize = this.direction === 'RIGHT' ? e.movementX : -e.movementX
+      if (this.width >= this.minWidth)
+        if (this.width + resize > this.maxWidth)
+          this.width = this.maxWidth
+        else
+          this.width += resize
       else
-        this.size = this.minSize
+        this.width = this.minWidth
+    },
+    computeAndSetMaxWidth() {
+      this.maxWidth = this.$el.parentNode.getBoundingClientRect().width - 400
     },
   },
 }
@@ -74,23 +84,25 @@ export default {
   z-index: 1;
 }
 
-.resizable-pane.vertical {
-  flex-direction: column;
+.resize-anchor {
+  cursor: col-resize;
 }
 
-.resizable-pane.horizontal .resize-anchor {
-  cursor: col-resize;
+.resize-anchor.left {
+  border-right: solid 1px var(--border-color);
+  border-left: solid 4px transparent;
+}
+
+.resize-anchor.right {
   border-left: solid 1px var(--border-color);
   border-right: solid 4px transparent;
 }
 
-.resizable-pane.vertical .resize-anchor {
-  cursor: row-resize;
-  border-top: solid 1px var(--border-color);
-  border-bottom: solid 4px transparent;
+.resize-anchor.left:hover, .resize-anchor.left.resizing {
+  border-right-color: var(--accent-color);
 }
 
-.resize-anchor:hover, .resize-anchor.resizing {
+.resize-anchor.right:hover, .resize-anchor.right.resizing {
   border-left-color: var(--accent-color);
 }
 </style>

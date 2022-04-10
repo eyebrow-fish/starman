@@ -1,5 +1,5 @@
 <template>
-  <ResizablePane :min-size="200" isVertical>
+  <ResizablePane :min-width="200" direction="LEFT">
     <div class="output">Hi!</div>
   </ResizablePane>
 </template>

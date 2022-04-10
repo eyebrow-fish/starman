@@ -1,5 +1,5 @@
 <template>
-  <ResizablePane :min-size="160">
+  <ResizablePane :min-width="160">
     <div class="list">
       <div class="search-area">
         <input class="search" type="text" v-model="search" placeholder="example.org">
