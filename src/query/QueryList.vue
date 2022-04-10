@@ -1,7 +1,7 @@
 <template>
   <ResizablePane :min-width="160">
     <div class="list">
-      <div class="search-area">
+      <div class="head">
         <input class="search" type="text" v-model="search" placeholder="example.org">
       </div>
       <div v-for="item in items" :key="item.id">
@@ -53,12 +53,7 @@ export default {
   width: 100%;
 }
 
-.search-area {
-  padding: 0.5em;
-  border-bottom: solid 1px var(--border-color);
-}
-
-.search-area .search {
+.search {
   width: 100%;
 }
 </style>

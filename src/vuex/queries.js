@@ -16,10 +16,22 @@ export default {
       },
     ],
     selectedId: 0,
+    responses: [
+      {
+        queryItemId: 0,
+        status: 'OK',
+        statusCode: 200,
+        responseTimeMs: 42,
+        body: 'qux',
+      },
+    ],
   },
   getters: {
     currentQueryItem(store) {
       return store.queryItems.find(i => i.id === store.selectedId)
+    },
+    currentResponse(store) {
+      return store.responses.find(i => i.queryItemId === store.selectedId)
     },
   },
   mutations: {

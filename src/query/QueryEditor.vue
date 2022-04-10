@@ -35,12 +35,6 @@ export default {
   min-width: 400px;
 }
 
-.head {
-  display: flex;
-  border-bottom: solid 1px var(--border-color);
-  padding: 0.5em;
-}
-
 .head *:not(:last-child) {
   margin-right: 0.5em;
 }

@@ -28,6 +28,7 @@ export default {
       type: Number,
       required: true,
     },
+    defaultWidth: String,
     direction: {
       type: String,
       default: 'RIGHT',
@@ -41,6 +42,8 @@ export default {
     }
   },
   mounted() {
+    this.$el.style.width = this.defaultWidth
+    this.width = this.$el.getBoundingClientRect().width
     this.computeAndSetMaxWidth()
     document.addEventListener('mouseup', this.endResizeListener)
     window.addEventListener('resize', this.computeAndSetMaxWidth)
@@ -88,7 +91,7 @@ export default {
 .resize-anchor {
   top: 0;
   bottom: 0;
-  cursor: col-resize; 
+  cursor: col-resize;
   position: absolute;
   padding: 0 10px;
 }
