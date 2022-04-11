@@ -21,6 +21,7 @@
 import {mapGetters, mapMutations} from 'vuex'
 import methods from '@/lib/methods'
 import axios from 'axios'
+import {v4} from 'uuid'
 
 export default {
   name: 'QueryEditor',
@@ -34,7 +35,7 @@ export default {
     ...mapGetters('queries', ['currentQueryItem']),
   },
   methods: {
-    ...mapMutations('queries', ['setSelectedId', 'newQueryItem']),
+    ...mapMutations('queries', ['newQueryItem']),
     async sendRequest() {
       this.loading = true
       const start = new Date()
@@ -51,8 +52,7 @@ export default {
       this.loading = false
     },
     addQuery() {
-      const item = this.newQueryItem()
-      this.setSelectedId(item.id)
+      this.newQueryItem(v4())
     },
   },
 }

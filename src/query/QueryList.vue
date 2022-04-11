@@ -24,6 +24,7 @@ import ResizablePane from '@/panes/ResizablePane'
 import QueryItem from '@/query/QueryItem'
 import {searchMatch} from '@/lib/strings'
 import {mapMutations, mapState} from 'vuex'
+import {v4} from 'uuid'
 
 export default {
   name: 'NavList',
@@ -42,10 +43,9 @@ export default {
     },
   },
   methods: {
-    ...mapMutations('queries', ['setSelectedId', 'newQueryItem']),
+    ...mapMutations('queries', ['newQueryItem']),
     addQuery() {
-      const item = this.newQueryItem()
-      this.setSelectedId(item.id)
+      this.newQueryItem(v4())
     },
   },
 }

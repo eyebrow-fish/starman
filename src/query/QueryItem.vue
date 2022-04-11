@@ -35,9 +35,11 @@ export default {
         actions: [
           {
             name: 'Edit',
-            event: () => {
-              this.item.editing = true
-            },
+            event: () => this.item.editing = true,
+          },
+          {
+            name: 'Delete',
+            event: () => this.removeQueryItem(this.item.id),
           },
         ],
       })
@@ -57,7 +59,7 @@ export default {
     },
   },
   methods: {
-    ...mapMutations('queries', ['setSelectedId']),
+    ...mapMutations('queries', ['setSelectedId', 'removeQueryItem']),
     selectItem() {
       this.setSelectedId(this.value.id)
     },
@@ -78,7 +80,7 @@ export default {
 <style scoped>
 .item {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   padding: 0.5em;
   border-bottom: solid 1px var(--border-color);
   cursor: pointer;
@@ -101,5 +103,6 @@ export default {
 
 .edit-name {
   width: 100%;
+  font-size: 14px;
 }
 </style>

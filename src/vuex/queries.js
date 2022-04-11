@@ -12,23 +12,21 @@ export default {
     selectedId: 0,
   },
   getters: {
-    currentQueryItem(store) {
-      return store.queryItems.find(i => i.id === store.selectedId)
-    },
+    currentQueryItem: store => store.queryItems.find(i => i.id === store.selectedId),
   },
   mutations: {
-    setSelectedId(store, value) {
-      store.selectedId = value
-    },
-    newQueryItem(store) {
-      const item = {
+    setSelectedId: (store, value) => store.selectedId = value,
+    newQueryItem(store, id) {
+      store.queryItems.push({
         ...store.queryItemId,
-        id: store.queryItems.length,
+        id,
         name: 'New query',
         editing: true,
-      }
-      store.queryItems.push(item)
-      return item
+      })
+      store.selectedId = id
+    },
+    removeQueryItem(store, id) {
+      store.queryItems.splice(store.queryItems.findIndex(i => i.id === id), 1)
     },
   },
 }
